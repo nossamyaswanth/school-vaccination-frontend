@@ -1,0 +1,24 @@
+<!-- student-view.component.html -->
+<div class="container">
+    <h3 class="text-center my-4">View Student</h3>
+  
+    <div *ngIf="student">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Full Name:</strong> {{ student.fullName }}</p>
+          <p><strong>Grade:</strong> {{ student.grade }}</p>
+          <p><strong>Date of Birth:</strong> {{ student.dateOfBirth | date }}</p>
+          <p><strong>Vaccination Status:</strong> {{ student.isVaccinated ? 'Vaccinated' : 'Not Vaccinated' }}</p>
+        </div>
+  
+        <div class="col-md-6" *ngIf="student.isVaccinated && student.certificateFileName">
+            <p><strong>Vaccination Certificate:</strong></p>
+            <button class="btn btn-success" (click)="downloadCertificate()">Download Certificate</button>
+          </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!student">
+      <p>Loading student data...</p>
+    </div>
+  </div>

@@ -1,0 +1,74 @@
+<div class="container mt-5">
+    <h2>Vaccination Reports</h2>
+  
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <div *ngIf="!reportData && !error">Loading...</div>
+  
+    <div *ngIf="reportData">
+      <!-- Key Metrics -->
+      <div class="row mt-4">
+        <div class="col-md-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5>Total Students</h5>
+              <h2>{{ reportData.totalStudents }}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5>Vaccinated</h5>
+              <h2>{{ reportData.vaccinated }} ({{ reportData.vaccinatedPercentage }}%)</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5>Not Vaccinated</h5>
+              <h2>{{ reportData.notVaccinated }}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5>Missed Vaccinations</h5>
+              <h2>{{ reportData.missedVaccinations }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Drive Performance -->
+      <div class="mt-5">
+        <h4>Drive Performance</h4>
+        <div *ngIf="!reportData.drivePerformance || reportData.drivePerformance.length === 0">
+          <p class="text-muted">No drives available.</p>
+        </div>
+        <table *ngIf="reportData.drivePerformance && reportData.drivePerformance.length > 0" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Drive Name</th>
+              <th>Scheduled Date</th>
+              <th>Location</th>
+              <th>Total Registered</th>
+              <th>Vaccinated</th>
+              <th>Missed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let drive of reportData.drivePerformance">
+              <td>{{ drive.driveName }}</td>
+              <td>{{ drive.scheduledDate | date:'mediumDate' }}</td>
+              <td>{{ drive.location }}</td>
+              <td>{{ drive.totalRegistered }}</td>
+              <td>{{ drive.vaccinated }}</td>
+              <td>{{ drive.missed }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

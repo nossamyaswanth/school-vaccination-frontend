@@ -1,0 +1,38 @@
+<!-- student-list.component.html -->
+<div class="container">
+  <h3 class="text-center my-4">Manage Students</h3>
+  
+  <!-- Table to display students -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Grade</th>
+        <th>Vaccination Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.id }}</td>
+        <td>{{ student.fullName }}</td>
+        <td>{{ student.grade }}</td>
+        <td>{{ student.isVaccinated ? 'Vaccinated' : 'Not Vaccinated' }}</td>
+        <td>
+          <!-- View Button -->
+          <button class="btn btn-info me-2" (click)="viewStudent(student.id)">View</button>
+          <!-- Edit Button -->
+          <button class="btn btn-warning me-2" (click)="editStudent(student.id)">Edit</button>
+          <!-- Delete Button -->
+          <button class="btn btn-danger" (click)="deleteStudent(student.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add Student Button -->
+  <div class="text-center">
+    <a routerLink="/students/add" class="btn btn-primary">Add Student</a>
+  </div>
+</div>

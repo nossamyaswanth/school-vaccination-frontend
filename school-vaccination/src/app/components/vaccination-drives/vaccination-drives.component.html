@@ -1,0 +1,47 @@
+<div class="container mt-4">
+    <h3>Vaccination Drive Management</h3>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()" class="mb-3">
+      <div class="mb-2">
+        <label>Vaccine Name</label>
+        <input formControlName="vaccineName" class="form-control" />
+      </div>
+      <div class="mb-2">
+        <label>Location</label>
+        <input formControlName="location" class="form-control" />
+      </div>
+      <div class="mb-2">
+        <label>Scheduled Date</label>
+        <input type="date" formControlName="scheduledDate" class="form-control" />
+      </div>
+  
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  
+      <button class="btn btn-primary me-2" type="submit">
+        {{ isEditMode ? 'Update Drive' : 'Add Drive' }}
+      </button>
+      <button class="btn btn-secondary" type="button" (click)="resetForm()">Clear</button>
+    </form>
+  
+    <h5>All Scheduled Drives</h5>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Vaccine</th>
+          <th>Location</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let drive of drives">
+          <td>{{ drive.vaccineName }}</td>
+          <td>{{ drive.location }}</td>
+          <td>{{ drive.scheduledDate | date:'mediumDate' }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="editDrive(drive)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,60 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Dashboard Overview</h2>
+  
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <div *ngIf="!summary && !error">Loading...</div>
+  
+    <div *ngIf="summary">
+      <div class="row text-center">
+        <div class="col-md-4 mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5>Total Students</h5>
+              <h2>{{ summary.totalStudents }}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5>Vaccinated</h5>
+              <h2>{{ summary.vaccinated }} / {{ summary.totalStudents }} ({{ summary.percentage }}%)</h2>
+              <div class="progress">
+                <div class="progress-bar bg-success" [style.width.%]="summary.percentage">
+                  {{ summary.percentage }}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5>Not Vaccinated</h5>
+              <h2>{{ summary.notVaccinated }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="mt-4">
+        <h4>Upcoming Vaccination Drives (Next 30 Days)</h4>
+        <div *ngIf="summary.upcomingDrives.length === 0">
+          <p class="text-muted">No drives scheduled in the next 30 days.</p>
+        </div>
+        <ul class="list-group" *ngIf="summary.upcomingDrives.length > 0">
+          <li class="list-group-item" *ngFor="let drive of summary.upcomingDrives">
+            <strong>{{ drive.vaccineName }}</strong> - {{ drive.scheduledDate | date:'mediumDate' }}<br />
+            Registered: {{ drive.totalRegistered }} | Vaccinated: {{ drive.vaccinated }} | Missed: {{ drive.missed }}
+          </li>
+        </ul>
+      </div>
+  
+      <div class="mt-4">
+        <h5>Quick Links</h5>
+        <a routerLink="/students" class="btn btn-outline-primary me-2">Manage Students</a>
+        <a routerLink="/drives" class="btn btn-outline-success me-2">Manage Drives</a>
+        <a routerLink="/reports" class="btn btn-outline-secondary">Reports</a>
+      </div>
+    </div>
+  </div>
