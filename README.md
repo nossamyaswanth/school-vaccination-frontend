@@ -39,7 +39,7 @@ The **SchoolVaccination** application is designed to manage vaccination drives f
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/nossamyaswanth/school-vaccination-frontend.git
    cd school-vaccination-frontend/school-vaccination
    ```
 
