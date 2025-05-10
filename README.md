@@ -11,8 +11,6 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 - [Development Server](#development-server)
 - [Code Scaffolding](#code-scaffolding)
 - [Building](#building)
-- [Running Unit Tests](#running-unit-tests)
-- [Running End-to-End Tests](#running-end-to-end-tests)
 - [Folder Structure](#folder-structure)
 - [Additional Resources](#additional-resources)
 
@@ -96,24 +94,6 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running Unit Tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running End-to-End Tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Folder Structure
 
