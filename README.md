@@ -1,141 +1,147 @@
-# School Vaccination Portal API
+# SchoolVaccination
 
-The **School Vaccination Portal API** is a backend application designed to manage vaccination drives, student vaccination records, and generate reports. It provides endpoints for authentication, managing students, vaccination drives, and generating vaccination reports.
-
----
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
 
 ## Table of Contents
 
+- [Overview](#overview)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
-- [Environment Variables](#environment-variables)
-- [Running the Application](#running-the-application)
-- [API Endpoints](#api-endpoints)
-- [Database Schema](#database-schema)
+- [Development Server](#development-server)
+- [Code Scaffolding](#code-scaffolding)
+- [Building](#building)
+- [Running Unit Tests](#running-unit-tests)
+- [Running End-to-End Tests](#running-end-to-end-tests)
+- [Folder Structure](#folder-structure)
+- [Additional Resources](#additional-resources)
 
----
+## Overview
+
+The **SchoolVaccination** application is designed to manage vaccination drives for schools. It includes features for managing students, vaccination drives, and generating reports.
 
 ## Features
 
-- **Authentication**: JWT-based authentication for secure access.
-- **Student Management**: CRUD operations for student records.
-- **Vaccination Drives**: Schedule and manage vaccination drives.
-- **Reports**: Generate vaccination summaries and export details to Excel.
-- **File Uploads**: Upload and download vaccination certificates.
-- **Excel Import**: Bulk import student data from Excel files.
-
----
+- User authentication with JWT.
+- Manage students (add, edit, delete, view).
+- Upload vaccination certificates and bulk student data via Excel.
+- Schedule and manage vaccination drives.
+- Generate and download vaccination reports.
+- Dashboard with key metrics and upcoming drives.
 
 ## Technologies Used
 
-- **.NET 9.0**: Backend framework.
-- **Entity Framework Core**: ORM for database operations.
-- **SQL Server**: Database.
-- **JWT Authentication**: Secure API access.
-- **Swagger/OpenAPI**: API documentation.
-- **EPPlus**: Excel file generation.
-- **ExcelDataReader**: Excel file parsing.
-
----
-
-## Prerequisites
-
-Ensure you have the following installed on your system:
-
-- [.NET SDK 9.0](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-- [Visual Studio Code](https://code.visualstudio.com/) or any IDE of your choice
-- [Postman](https://www.postman.com/) or any API testing tool (optional)
-
----
+- **Angular**: Frontend framework.
+- **Bootstrap**: For responsive UI design.
+- **RxJS**: For reactive programming.
+- **Chart.js**: For data visualization.
+- **Karma**: For unit testing.
 
 ## Setup Instructions
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/nossamyaswanth/school-vaccination-frontend.git
-   cd school-vaccination-portal-api/SchoolVaccination.API
+   git clone <repository-url>
+   cd school-vaccination-frontend/school-vaccination
    ```
-2. **Restore Dependencies**:
+
+2. **Install Dependencies**:
+   Ensure you have Node.js installed. Then run:
    ```bash
-   dotnet restore
+   npm install
    ```
-3. **Set Up the Database**:
-   - Update the connection string in appsettings.json:
+
+3. **Environment Setup**:
+   - Ensure the backend API is running on `http://localhost:5020`.
+   - Update the API URLs in the services if needed (e.g., `src/app/services/student.service.ts`).
+
+4. **Run the Application**:
+   Start the development server:
    ```bash
-   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost,1433;Database=schoolvaccination.db;User Id=sa;Password=YourPassword;TrustServerCertificate=True;"
-    }
-   ```
-   - Apply migrations:
-   ```bash
-   dotnet ef database update
-   ```
-4.**Seed the Database**: 
-  - The database will be seeded automatically when the application starts.
- 
----
-   
-### Environment Variables
-
-The application uses the following environment variables (configured in `appsettings.json`):
-
-- `Jwt:Key`: Secret key for signing tokens.  
-- `Jwt:Issuer`: Token issuer.  
-- `Jwt:Audience`: Token audience.
-   ```bash
-   "Jwt": {
-  "Key": "supersecretkey1234567890123123@JWT!secureKey",
-  "Issuer": "SchoolVaccinationPortal",
-  "Audience": "SchoolVaccinationUsers"
-  }
+   npm start
    ```
 
----
+   Open your browser and navigate to `http://localhost:4200/`.
 
-### Running the Application
+## Development Server
 
-1. **Start the Application**:
-   ```bash
-   dotnet run
-   ```
-2. **Access the API**:
-    - *Swagger UI*: [http://localhost:5020/swagger](http://localhost:5020/swagger)  
-    - *API Base URL*: [http://localhost:5020](http://localhost:5020)
+To start a local development server, run:
 
----
+```bash
+ng serve
+```
 
-### API Endpoints
-#### Authentication
-- **POST** `/auth/login`: Authenticate and get a JWT token.
-#### Students
-- **GET** `/api/students`: Get all students  
-- **POST** `/api/students`: Add a new student  
-- **PUT** `/api/students/{id}`: Update a student  
-- **DELETE** `/api/students/{id}`: Delete a student  
-- **POST** `/api/students/{id}/upload`: Upload a vaccination certificate  
-- **GET** `/api/students/{id}/download`: Download a vaccination certificate
-#### Vaccination Drives
-- **GET** `/api/vaccinationdrive`: Get all vaccination drives  
-- **POST** `/api/vaccinationdrive`: Schedule a new drive  
-- **PUT** `/api/vaccinationdrive/{id}`: Update a drive
-#### Vaccination Records
-- **POST** `/api/vaccinationrecord`: Add or update a vaccination record
-#### Reports
-- **GET** `/api/reports/summary`: Get vaccination summary  
-- **GET** `/api/reports/download-vaccination-details`: Download vaccination details as an Excel file
-  
----
-### Database Schema
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-#### Tables
-- **Students**: Stores student details  
-- **VaccinationDrives**: Stores vaccination drive details  
-- **VaccinationRecords**: Stores vaccination records  
-- **Users**: Stores user credentials for authentication
+## Code Scaffolding
 
----
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-This `README.md` provides a comprehensive overview of your project, including setup instructions, API endpoints, and features. You can customize it further as needed.
+```bash
+ng generate component component-name
+```
+
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+
+```bash
+ng generate --help
+```
+
+## Building
+
+To build the project, run:
+
+```bash
+ng build
+```
+
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running Unit Tests
+
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running End-to-End Tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Folder Structure
+
+Below is an overview of the folder structure:
+
+```
+school-vaccination/
+├── src/
+│   ├── app/
+│   │   ├── auth/                # Authentication module
+│   │   ├── components/          # Application components
+│   │   │   ├── dashboard/       # Dashboard component
+│   │   │   ├── reports/         # Reports component
+│   │   │   ├── students/        # Student management components
+│   │   │   ├── vaccination-drives/ # Vaccination drives component
+│   │   ├── services/            # Angular services for API calls
+│   │   ├── app.routes.ts        # Application routes
+│   │   ├── app.config.ts        # Application configuration
+│   │   ├── app.component.ts     # Root component
+│   ├── assets/                  # Static assets
+│   ├── styles.css               # Global styles
+│   ├── index.html               # Main HTML file
+├── angular.json                 # Angular CLI configuration
+├── package.json                 # Node.js dependencies and scripts
+├── tsconfig.json                # TypeScript configuration
+├── README.md                    # Project documentation
+```
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
