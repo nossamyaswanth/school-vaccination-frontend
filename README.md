@@ -55,7 +55,7 @@ Ensure you have the following installed on your system:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/school-vaccination-portal-api.git
+   git clone https://github.com/nossamyaswanth/school-vaccination-frontend.git
    cd school-vaccination-portal-api/SchoolVaccination.API
    ```
 2. **Restore Dependencies**:
