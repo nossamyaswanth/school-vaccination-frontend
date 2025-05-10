@@ -26,12 +26,33 @@ export class ReportsComponent implements OnInit {
           vaccinatedPercentage: data.totalStudents > 0
             ? Math.round((data.vaccinated / data.totalStudents) * 100)
             : 0,
-          drivePerformance: data.drivePerformance || [] // Ensure drivePerformance is an array
+          drivePerformance: data.driveSummary || [] // Ensure drivePerformance is an array
         };
       },
       error: (err) => {
         console.error(err);
         this.error = 'Failed to load report data.';
+      }
+    });
+  }
+
+  downloadReport(): void {
+    this.reportsService.downloadVaccinationDetails().subscribe({
+      next: (response) => {
+        console.log('Download response:', response); // Debugging log
+        const blob = new Blob([response], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'VaccinationDetails.xlsx';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Failed to download the report.');
       }
     });
   }

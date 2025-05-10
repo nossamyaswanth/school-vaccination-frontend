@@ -35,4 +35,13 @@
   <div class="text-center">
     <a routerLink="/students/add" class="btn btn-primary">Add Student</a>
   </div>
+
+  <!-- Add Upload Excel Button -->
+  <div class="text-center mt-3">
+    <button class="btn btn-success" (click)="openFileUpload()">Upload Excel</button>
+  </div>
+
+  <!-- File Upload Input (hidden) -->
+  <input type="file" #fileInput (change)="uploadExcel($event)" style="display: none;" />
+  
 </div>

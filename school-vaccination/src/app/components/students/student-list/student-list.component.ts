@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentService } from '../../../services/student.service';
 import { CommonModule } from '@angular/common';
@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 })
 export class StudentListComponent implements OnInit {
   students: any[] = [];
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   constructor(
     private studentService: StudentService,
@@ -49,5 +50,29 @@ export class StudentListComponent implements OnInit {
         this.getStudents();
       });
     }
+  }
+
+  // Open file upload dialog
+  openFileUpload(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  // Handle file upload
+  uploadExcel(event: any): void {
+    const file = event.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    this.studentService.uploadStudentsExcel(file).subscribe({
+      next: () => {
+        alert('Students uploaded successfully.');
+        this.getStudents(); // Reload the student list
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Failed to upload students.');
+      }
+    });
   }
 }

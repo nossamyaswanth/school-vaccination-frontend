@@ -40,6 +40,11 @@
           </div>
         </div>
       </div>
+
+      <!-- Download Report Button -->
+      <div class="text-center mt-4">
+        <button class="btn btn-success" (click)="downloadReport()">Download Report</button>
+      </div>
   
       <!-- Drive Performance -->
       <div class="mt-5">
@@ -52,7 +57,6 @@
             <tr>
               <th>Drive Name</th>
               <th>Scheduled Date</th>
-              <th>Location</th>
               <th>Total Registered</th>
               <th>Vaccinated</th>
               <th>Missed</th>
@@ -60,9 +64,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let drive of reportData.drivePerformance">
-              <td>{{ drive.driveName }}</td>
+              <td>{{ drive.vaccineName }}</td>
               <td>{{ drive.scheduledDate | date:'mediumDate' }}</td>
-              <td>{{ drive.location }}</td>
               <td>{{ drive.totalRegistered }}</td>
               <td>{{ drive.vaccinated }}</td>
               <td>{{ drive.missed }}</td>

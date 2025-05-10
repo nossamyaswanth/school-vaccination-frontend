@@ -54,6 +54,19 @@ export class StudentService {
     return this.http.post<any>(`${this.apiUrl}/${studentId}/upload`, formData, { headers });
   }
 
+  // POST: Upload Excel file for bulk student upload
+  uploadStudentsExcel(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Do not set 'Content-Type' here for FormData
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/upload-excel`, formData, { headers });
+  }
+
   // uploadCertificate(studentId: number, file: File): Observable<any> {
   //   const formData = new FormData();
   //   formData.append('file', file);

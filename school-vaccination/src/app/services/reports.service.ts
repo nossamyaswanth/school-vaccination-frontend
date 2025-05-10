@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReportsService {
-  private apiUrl = 'http://localhost:5020/api/Reports/summary';
+  private apiUrl = 'http://localhost:5020/api/Reports';
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +16,19 @@ export class ReportsService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.get<any>(this.apiUrl, { headers });
+    return this.http.get<any>(`${this.apiUrl}/summary`, { headers });
   }
+
+  downloadVaccinationDetails(): Observable<Blob> {
+    const token = localStorage.getItem('token'); // Assuming the JWT token is stored in localStorage
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}/download-vaccination-details`, {
+      headers,
+      responseType: 'blob' // Expect a binary file (Excel)
+    });
+  }
+  
 }
